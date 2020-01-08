@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Command Artisan: php artisan make:resource Product
+ */
 class Product extends JsonResource
 {
     /**
@@ -15,12 +18,15 @@ class Product extends JsonResource
     public function toArray($request)
     {
         // return parent::toArray($request);
+        $deleted = $this->deleted ? 'yes' : 'not';
+
         return [
             'identify' => $this->id,
             'title' => $this->title,
             'body' => $this->description,
             'created' => $this->created_at,
             'updated' => $this->updated_at,
+            'deleted' => $deleted,
             // 'api_version' => '1.0.1'
             'links' => [
                 'remove' => 'link-remove',

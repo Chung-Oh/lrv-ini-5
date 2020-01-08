@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * Commands Artisan: php artisan make:resource Products --collection
+ */
 class Products extends ResourceCollection
 {
     /**

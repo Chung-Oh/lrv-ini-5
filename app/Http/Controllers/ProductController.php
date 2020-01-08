@@ -16,8 +16,12 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // Product::find(4)->delete();
+        // Product::withTrashed()->find(4)->restore();
+        // Product::onlyTrashed()->forceDelete(); // Remove definitivo
+        // return new ProductsResource(Product::withTrashed()->get()); // Todos e os removidos
+        // return Product::onlyTrashed()->get(); // Somenete removidos
         return new ProductsResource(Product::all());
-        // return Product::all();
     }
 
     /**
