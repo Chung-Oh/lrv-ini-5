@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Scopes\ActivatedScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -14,6 +16,15 @@ class Product extends Model
     protected $hidden = ['title'];
     protected $appends = ['resume_title'];
     protected $casts = ['created_at' => 'datetime:d/m/Y H:00'];
+
+    /**
+     * Faz retornar apenas com propriedade ativa.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new ActivatedScope);
+    }
 
     /**
      * ACCESSOR

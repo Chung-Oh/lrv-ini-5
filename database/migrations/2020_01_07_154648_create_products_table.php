@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title', 100);
             $table->text('description');
+            $table->boolean('activated');
             $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });

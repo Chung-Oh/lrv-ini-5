@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Scopes\ActivatedScope;
 use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\Products as ProductsResource;
 
@@ -21,6 +22,8 @@ class ProductController extends Controller
         // Product::onlyTrashed()->forceDelete(); // Remove definitivo
         // return new ProductsResource(Product::withTrashed()->get()); // Todos e os removidos
         // return Product::onlyTrashed()->get(); // Somenete removidos
+        // return new ProductsResource(Product::withoutGlobalScope('isActivated')->get()); // Traz todos, ignorando o Global Scope da Model, essa linha não funciona pelo fato de ter criado a classe ActivatedScope
+        // return new ProductsResource(Product::withoutGlobalScope(ActivatedScope::class)->get()); // Traz todos, ignorando o Global Scope da Model
         return new ProductsResource(Product::all());
     }
 

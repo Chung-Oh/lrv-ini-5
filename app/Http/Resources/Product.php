@@ -26,6 +26,7 @@ class Product extends JsonResource
             'body' => $this->description,
             'created' => $this->created_at,
             'updated' => $this->updated_at,
+            'activated' => $this->activated,
             'deleted' => $deleted,
             // 'api_version' => '1.0.1'
             'links' => [
