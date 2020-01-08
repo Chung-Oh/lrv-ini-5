@@ -8,6 +8,8 @@ class Product extends Model
 {
     protected $guarded = ['id'];
     protected $fillable = ['title', 'description'];
+    protected $appends = ['resume_title'];
+    protected $casts = ['created_at' => 'datetime:d/m/Y H:00'];
 
     /**
      * ACCESSOR
@@ -18,8 +20,20 @@ class Product extends Model
      */
     public function getTitleAttribute($value)
     {
-        if (isset($this->attributes['title'][3])) {
-            return mb_substr($this->attributes['title'], 0, 3) . '...';
+        return strtoupper($value);
+    }
+
+    /**
+     * ACCESSOR
+     * Get the resume title.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getResumeTitleAttribute($value)
+    {
+        if (isset($this->attributes['title'][20])) {
+            return mb_substr($this->attributes['title'], 0, 20) . '...';
         }
 
         return $this->attributes['title'];
