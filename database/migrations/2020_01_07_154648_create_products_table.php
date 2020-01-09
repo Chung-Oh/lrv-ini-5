@@ -18,7 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('title', 100);
             $table->text('description');
             $table->boolean('activated');
+            $table->integer('user_id')->unsigned();
             $table->datetime('deleted_at')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

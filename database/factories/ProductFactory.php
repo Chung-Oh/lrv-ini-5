@@ -10,6 +10,9 @@ $factory->define(Product::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'description' => implode(' ', $faker->paragraphs),
         'activated' => rand(0, 1),
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
         'deleted_at' => null
     ];
 });
