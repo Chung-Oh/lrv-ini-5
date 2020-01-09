@@ -12,10 +12,18 @@ class Product extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'activated'];
     protected $hidden = ['title'];
     protected $appends = ['resume_title'];
     protected $casts = ['created_at' => 'datetime:d/m/Y H:00'];
+
+    /**
+     * Events
+     */
+    protected $dispatchesEvents = [
+        'created' => \App\Events\ProductsCreated::class,
+        'creating' => \App\Events\ProductsCreating::class
+    ];
 
     /**
      * Faz retornar apenas com propriedade ativa.
@@ -24,6 +32,9 @@ class Product extends Model
     {
         parent::boot();
         static::addGlobalScope(new ActivatedScope);
+        // static::addGlobalScope('isActivated', function (Builder $builder) {
+        //     $builder->where('activated', 1);
+        // });
     }
 
     /**
